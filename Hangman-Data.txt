@@ -1,0 +1,228 @@
+Statistics for the Three Algorithms
+
+Notice that 6 is the standard number of guesses for Executioner (head, body, arm, 
+arm, leg, leg). I did a variety of trials, because my better algorithms don't 
+have a statistically significant number of losses for 6 trials.
+
+Unless otherwise specified, there was only one run calculated. All statistics 
+use "wl-medium.txt"
+
+Wins after 3 guesses and 200 trials
+	vc: 134
+	freq: 131
+	quick: 3 (mean of 10 runs)
+
+Wins after 4 guesses and 200 trials
+	vc: 159
+	freq: 152
+	quick: 8 (mean of 10 runs)
+
+Wins after 6 guesses and 200 trials
+	vc: 186
+	freq: 185
+	quick: 24
+
+Wins after 8 guesses and 200 trials
+	vc: 193
+	freq: 195
+	quick: 63
+
+Average word length
+	wins
+		vc: 9.3 (3 guesses, 600 trials)
+		quick: 9.2 (6 guesses, 20,000 trials)
+		
+	losses
+		vc: 6.6 (3 guesses, 600 trials)
+		quick: 8.3 (6 guesses, 20,000 trials)
+
+Wins on vc after 6 guesses and 200 trials, using choose_word()
+	count = 50: 144
+	count = 500: 98
+
+Executioner with count = 3000 against a human:
+	tizzy: executioner wins
+	fuzz: executioner
+	buzz: human
+	cowpox: executioner
+
+
+************************************************************************************
+************************************************************************************
+************************************************************************************
+
+Data Version 2
+
+Using the guesser's adaptive algorithm. 
+
+ - Each new word is worth 1/5 of the total (guesser.new_word_weight = 1/5)
+ - Uses solve_vc().
+ - 1000 trials.
+
+Uses the following proportions for how much the given words are worth relative to letter frequency. The associated variable is given_words_weight. This tells how many times the guesser wins and loses with each proportion.
+
+executioner.count = 2000 is the value such that the guesser's best choice is as bad as 
+possible.
+
+Summary - Best Values for guesser.given_words_weight to Give Guesser an Advantage
+executioner.choose_word() at count=50:   0
+executioner.choose_word() at count=200:  1/4
+executioner.choose_word() at count=500:  1/4
+executioner.choose_word() at count=2000: 1/3
+executioner.choose_word() at count=8000: 1/3
+
+Summary - Best Values for executioner.count to Give Executioner an Advantage
+guesser.given_words_weight at 1  :   50
+guesser.given_words_weight at 3/4:  500
+guesser.given_words_weight at 1/2: 2000
+guesser.given_words_weight at 1/3: 2000
+guesser.given_words_weight at 1/4: 2000
+guesser.given_words_weight at 0  : 8000
+
+executioner.choose_word() at count=50:
+1  :  24 wins, 976 losses
+3/4: 306 wins, 694 losses
+1/2: 597 wins, 403 losses
+1/3: 717 wins, 283 losses
+1/4: 713 wins, 287 losses
+0  : 720 wins, 280 losses
+
+executioner.choose_word() at count=200:
+1  :  31 wins, 969 losses
+3/4: 260 wins, 740 losses
+1/2: 505 wins, 495 losses
+1/3: 592 wins, 408 losses
+1/4: 618 wins, 382 losses
+0  : 555 wins, 445 losses
+
+executioner.choose_word() at count=500:
+1  :  48 wins, 952 losses
+5/6: 180 wins, 820 losses
+1/2: 453 wins, 547 losses
+1/3: 521 wins, 479 losses
+1/4: 533 wins, 467 losses
+0  : 445 wins, 555 losses
+
+executioner.choose_word() at count=2000:
+1  : 136 wins, 864 losses
+3/4: 259 wins, 741 losses
+1/2: 371 wins, 629 losses
+1/3: 450 wins, 550 losses
+1/4: 375 wins, 625 losses
+0  : 244 wins, 756 losses
+
+executioner.choose_word() at count=8000:
+1  : 243 wins, 757 losses
+3/4: 387 wins, 613 losses
+1/2: 416 wins, 584 losses
+1/3: 465 wins, 535 losses
+1/4: 412 wins, 588 losses
+0  :   0 wins,1000 losses
+
+*****
+
+guesser.given_words_weight works best at 7/24, and executioner.choose_word_count works best at 2048. How can the opponent best handle these?
+
+Maximizing Count for Worst-Case Guesser
+guesser.given_words_weight = 7/24: (calculated on 5/31/10)
+count=    1: 996 wins,  34 losses
+count=  256: 594 wins, 406 losses
+count= 1024: 536 wins, 464 losses
+count= 2048: 502 wins, 498 losses
+count= 3072: 549 wins, 451 losses
+count= 4096: 661 wins, 339 losses
+count=16384: 955 wins,  45 losses
+count=65536: 999 wins,   1 losses
+
+guesser.given_words_weight = 7/24: (calculated on 6/1/10)
+count=   16: 793 wins, 207 losses
+count=  256: 586 wins, 414 losses
+count= 2048: 499 wins, 501 losses
+count=16384: 832 wins, 168 losses
+count=16384 with zero frequency prevention: 910 wins, 90 losses
+
+Maximizing Weight for Worst-Case Executioner
+guesser.given_words_weight where count=2048:
+ 4/24: 406 wins, 594 losses
+ 7/24: 512 wins, 488 losses
+10/24: 574 wins, 426 losses
+12/24: 609 wins, 391 losses
+13/24: 573 wins, 427 losses
+16/24: 507 wins, 493 losses
+
+************************************************************************************
+
+Things that I tried that turned out to be a bad idea
+
+multiplicative frequency and guesser.new_word_weight = 1/30: (calculated on 6/1/10)
+count=    1: 
+count=   16: 765 wins, 235 losses
+count=  256: 589 wins, 411 losses
+count= 2048: 658 wins, 342 losses
+count=16384: 980 wins,  20 losses
+
+multiplicative frequency and guesser.new_word_weight = 1/30, commented out given_words_weight and total_xxx_freq: (calculated on 6/1/10)
+count=    1: 929 wins,  71 losses
+count=   16: 784 wins, 216 losses
+count=  256: 599 wins, 401 losses
+count= 2048: 458 wins, 542 losses
+count=16384: 737 wins, 263 losses
+
+************************************************************************************
+
+Data for guesser.new_word_weight
+
+ - Uses solve_vc().
+ - 1000 trials.
+ - executioner.choose_word() uses count=2000
+ - guesser.given_words_weight = 7 / 24 (right between 1/4 (6/24) and 1/3 (8/24))
+
+guesser.new_word_weight
+1/2  : 388 wins, 612 losses
+1/5  : 399 wins, 601 losses
+1/10 : 418 wins, 582 losses
+1/30 : 440 wins, 560 losses
+1/100: 426 wins, 574 losses
+
+************************************************************************************
+
+Data for a self-changing guesser.given_words_weight
+
+ - Uses solve_vc().
+ - 1000 trials.
+ - executioner.choose_word() uses count=2048
+ - guesser.new_words_weight = 1/10
+
+When using RVS 2, there may appear to be a discrepancy of two points between the sum of values in given_words_weights and the total number of wins/losses. This is because given_word_weights is being printed out earlier than you'd think.
+
+executioner.choose_word() uses count=2048
+RVS 2, 0 to 11/24: 450 wins, 550 losses
+RVS 2, 0 to 23/24: 452 wins, 548 losses
+CVS 0, 7/24      : 502 wins, 298 losses
+
+executioner.choose_word() uses RVS 3 and executioner.tries_before_change=10
+CVS 0, 7/24      : 640 wins, 360 losses
+
+executioner.choose_word() uses RVS 2, guesser on CVS 7/24
+2**(0...16): 515 wins, 485 losses
+2**(8...16): 521 wins, 479 losses
+4**(4...8) : 543 wins, 457 losses
+4**(2...5) : 608 wins, 392 losses
+
+The following instances of faulty data are because all 24 combinations were accidentally left in. It appears that they were never selected, but the data still may be faulty. Do not rely on it too heavily. It also appears that the method of adding to the numerator or denominator of the ratio was not working properly, so that will heavily affect the data. It is unknown how, exactly.
+
+RVS 2, [4/24, 7/24, 10/24]: (THESE DATA MAY BE FAULTY)
+count= 256: 593 wins, 407 losses
+count=1024: 516 wins, 484 losses
+
+RVS 2, [7/24, 12/24] and count=2048. default ratios: (THESE DATA MAY BE FAULTY)
+[22/12, 18/12]: 561 wins, 439 losses
+[30/12, 18/12]: 539 wins, 461 losses
+[22/12]       : 500 wins, 500 losses
+
+
+RVS 2, [7/24, 12/24] with ratios [22/12, 18/12]: (probably not compromised)
+count=   16: 781 wins, 219 losses
+count=  256: 578 wins, 422 losses
+count= 2048: 514 wins, 486 losses
+count=16384: 848 wins, 152 losses

@@ -1,0 +1,114 @@
+During AP Physics, I documented games for against people and against the computer.
+
+Player Name | Wins as guesser against this person | Losses as guesser against this person
+computer	| 3*Tatiana, 2*Katherine, 2*Elle	  | Tatiana, Elle
+Luke											  | computer, Kelley
+Chelsea		| 									  | computer, Kelley
+Kelley		| Tatiana							  | computer, Katherine
+Katherine	| 									  | computer, Luke, Kelley
+Elle		| computer							  | computer, Kelley, Katherine
+Tatiana		| Luke, computer					  | computer, Chelsea
+Michael		|									  | Tatiana
+			|									  |
+human		| 2*computer, 2*human				  | 6*computer, 10*human
+computer	| 7*human							  | 2*human
+
+The computer was using solve_freq().
+
+Note that one win against the computer (Elle) was using a word that the computer had used against a person, that word being "tizzy". Also note that the computer as an executioner was frequently choosing words with z's, and people were starting to get wise. There was not yet any adaptive algorithm.
+
+Elle sometimes guessed words that the computer didn't know. It was decided that an executioner's wins against a word that the guesser didn't know would not count. For some of Elle's guesses, I was using wl-large-sp instead of the standard wl-medium.
+
+Human executioners chose photosynthesis, celestial, misanthropy, chandra (not in dictionary), dialectical (not in dictionary), endenization (not in dictionary), postulates, postmistresses, jiffy (beat computer), axiom (not in dictionary), unveil, extrusion, tizzy (beat computer).
+
+The computer executioner chose (on count=3000) fuzz, ruff, pizazz, buzz, buzz (I removed this one because it was a duplicate), dizzy, tizzy, and (on count=500) minx, comfy. It also included w, b, j, f, and q, but I didn't consider those to be real words. I don't remember which words were guessed correctly by humans, but I remember that ruff, pizazz, tizzy, and minx were not guessed.
+
+*************************************************************************************
+
+11/25/10
+
+Against Josh
+
+Executioner | Word 			| Who Wins
+Josh		| vernacular	| computer
+Computer	| pyx			| computer
+Josh		| lode			| Josh
+Computer	| my			| Josh
+Josh		| geyser		| Josh
+Computer	| chubby		| computer
+Josh		| chewy			| Josh
+Computer	| avow			| computer
+Josh		| gastronomy	| computer
+Computer	| squawk		| computer
+Josh		| dinner		| computer
+Computer	| iffy			| computer
+Josh		| jaguar		| computer
+Computer	| jazzy			| computer
+Josh		| raven			| computer
+Computer	| huffy			| computer
+Josh		| masochistic	| computer
+Computer	| blowzy		| computer
+Josh		| turd			| Josh
+Computer	| dewy			| Josh
+Josh		| fart			| Josh
+Computer	| dumpy			| computer
+Josh		| poop			| computer
+Josh		| fruition		| computer
+Computer	| my			| Josh
+Josh		| fortune		| computer
+Computer	| comfy			| computer
+Josh		| turd			| Josh
+Computer	| rebuff		| computer
+Josh		| fart			| computer
+
+Josh wins: 9 (6 as executioner, 3 as guesser)
+computer wins: 21 (11 as executioner, 10 as guesser)
+
+Words that beat the computer: lode, geyser, chewy, turd, fart, turd
+Words that were guessed: my, dewy
+
+Notes
+After a while Josh figured out that most of the computer words contained a 'y'. Of the three words he guessed correctly, all contained a 'y' and two of them were 'my'.
+
+*************************************************************************************
+
+11/26/10
+
+Against Mara
+
+Executioner | Word 			| Who Wins
+Mara		| stellar		| computer
+Computer	| puffy			| computer
+Mara		| phenomenal	| computer
+Computer	| fuzz			| computer
+Mara		| penis			| computer
+Computer	| pyx			| computer
+Mara		| fig			| Mara
+Computer	| buzz			| computer
+Mara		| jig			| Mara
+Computer	| blowzy		| computer
+Mara		| dam			| computer
+Computer	| mommy			| computer
+Mara		| cat			| Mara
+Computer	| vex			| computer
+Mara		| mop			| computer
+Computer	| skivvy		| computer
+Mara		| it			| computer
+Computer	| hawk			| computer
+Mara		| loop			| computer
+Computer	| dizzy			| computer
+Mara		| fry			| Mara
+Computer	| fizz			| Mara
+Mara		| sassy			| computer
+Computer	| blowzy		| computer
+Mara		| put			| Mara
+Computer	| bawdy			| computer
+
+Mara wins: 6 (5 as executioner, 1 as guesser)
+computer wins: 20 (12 as executioner, 8 as guesser)
+
+Words that beat the computer: fig, jig, cat, fry, put
+Words that were guessed: fizz
+
+Notes
+After 7 rounds she determined that shorter words are harder to guess.

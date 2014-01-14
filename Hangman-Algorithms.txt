@@ -1,0 +1,55 @@
+GENERAL ALGORITHMS
+
+Runtime Value Selection (RVS)
+	If there is some value, such as importance of given letters vs. general letter frequency, it may be smart to adjust it at runtime based on how well the current value is doing. There is more than one way to adjust it.
+	0. Just choose whichever one is best. a.k.a. Compile-time Value Selection
+	1. Keep a list of different values and how well they each do. If the score starts to fall too low, switch to another value that has a record of good performance.
+	2. Keep a list of different values and how well they each do. Before each round, select whichever value is doing best.
+	3. Calculate the average for how well different values do, then choose a value to start with. If the score ever drops below average, switch to a different value.
+	4. Have an array with just a default value, and if it falls below a certain ratio for too long, add another value to the array.
+
+Runtime Value Selection can be applied to:
+	- Guesser: given letters vs. general letter frequency
+	- Guesser: probability of choosing vowels first
+	- Executioner: choose_word()'s count
+
+
+EXECUTIONER ALGORITHMS
+
+It's really hard to have executioner algorithms that aren't counter-productive, but the executioner is at a natural advantage anyway.
+
+Assumptions
+ - It is impossible to know exactly how the guesser is guessing.
+
+Deterministic
+ - Select words that contain rarer letters.
+ - Select words that contain fewer letters.
+
+Relative
+ - TODO: When choosing words, choose words with different letters each game. This makes it hard for an adaptive algorithm to guess words. I (as a human) used this against the guesser and did very well (at least for the first 20 or so rounds, but there are at least 200 so this may not work).
+ - TODO: Record which letters the guesser guesses, and intentionally choose words that don't contain those letters.
+ - Record which words are hardest and easiest to guess, and give harder words more often.
+ - TODO: Notice if the guesser is following certain patterns (e.g. guessing vowels first) and exploit those patterns.
+
+
+GUESSER ALGORITHMS
+
+The guesser has the disadvantage here, so it has to be all the more intelligent. The following algorithms start at the bottom and build up.
+
+Assumptions
+ - Knowledge of the executioner's word is impossible.
+ - It is impossible to perfectly predict what the word will be, because selection is random.
+ - Words will follow no patterns other than letter frequency.
+
+Deterministic
+ - Choose letters in order of letter frequency.
+ - Recalculate letter frequency based only on whichever words are possible solutions.
+ - Nearly all words contain at least one vowel, so keep guessing vowels until you get one.
+ - Choose letters based on what digraphs are most likely. (Although useful for humans, this is probably not going to help a computer that can enumerate every possible word.)
+ - Find a set of letters that are contained in nearly all words. (This strategy may have only limited effectiveness.)
+
+Relative
+ - Change letter frequency based on what words the executioner has chosen.
+ - Change the weight on frequency of given letters vs. general letter frequency, based on how well it is doing.
+ - If Executioner is choosing the same words a lot, increase the relative importance of given word frequency. It can do this by looking for extreme variations in given word frequency; if the letters fbzu are all very common but the next most common is a good deal less common, then fbzu are being used a lot so the relative importance of given word frequency should be increased.
+ - Evaluate the rarity of given words, and choose the relative importance of given word frequency based on that.
